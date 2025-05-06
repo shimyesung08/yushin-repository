@@ -1,5 +1,5 @@
 const files = [
-  "papers/기하 2022 3_1학기1차_문제.pdf",
+  "papers/기하 2023_1학기1차_문제.pdf",
   "papers/물리 2021_1학기2차_문제.pdf",
   "papers/물리 2022_1학기2차_문제.pdf",
   "papers/물리 2023_1학기2차_문제.pdf",
