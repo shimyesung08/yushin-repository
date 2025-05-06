@@ -1,3 +1,18 @@
+const password = "yushin123"; // 원하는 비밀번호로 변경 가능
+
+function checkPassword() {
+  const input = document.getElementById("password").value;
+  const error = document.getElementById("loginError");
+
+  if (input === password) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    showFiles();
+  } else {
+    error.textContent = "비밀번호가 틀렸습니다.";
+  }
+}
+
 const files = [
   "papers/기하 2023_1학기1차_문제.pdf",
   "papers/물리 2021_1학기2차_문제.pdf",
@@ -15,31 +30,32 @@ const files = [
   "papers/화학 2024_1학기2차_문제.pdf"
 ];
 
-
-
-const listElement = document.getElementById("fileList");
-const input = document.getElementById("searchInput");
-
-function displayFiles(keyword = "") {
-  listElement.innerHTML = "";
-  const filtered = files.filter(name =>
-    name.toLowerCase().includes(keyword.toLowerCase())
-  );
-
-  filtered.forEach(name => {
+function showFiles() {
+  const list = document.getElementById("fileList");
+  files.forEach(file => {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.href = "papers/" + name;
-    a.textContent = name.replace(".pdf", "");
+    a.href = file;
+    a.textContent = file.replace("papers/", "");
     a.target = "_blank";
     li.appendChild(a);
-    listElement.appendChild(li);
+    list.appendChild(li);
   });
-
-  if (filtered.length === 0) {
-    listElement.innerHTML = "<li>결과가 없습니다.</li>";
-  }
 }
 
-input.addEventListener("input", () => displayFiles(input.value));
-displayFiles();
+function filterFiles() {
+  const keyword = document.getElementById("search").value.toLowerCase();
+  const list = document.getElementById("fileList");
+  list.innerHTML = "";
+  files
+    .filter(file => file.toLowerCase().includes(keyword))
+    .forEach(file => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = file;
+      a.textContent = file.replace("papers/", "");
+      a.target = "_blank";
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+}
